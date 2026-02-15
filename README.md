@@ -33,17 +33,28 @@ crypto-backfill/
 
 ## 📁 기본 설정
 
-기본 심볼: BTCUSDT
+기본 심볼: BTCUSDT, ETHUSDT
 
 다른 코인을 추가하려면
-backfill/config.py 파일에서 심볼을 수정하면 됩니다.
+docker-compose.yml 파일에서 심볼을 수정하면 됩니다.
+
+```text
+environment:
+      CLICKHOUSE_HOST: clickhouse
+      CLICKHOUSE_HTTP_PORT: "8123"
+      CLICKHOUSE_DB: crypto
+      CLICKHOUSE_TABLE: spot_klines_1m
+
+      # 대상 심볼
+      SYMBOLS: "BTCUSDT,ETHUSDT"
+```
 
 --- 
 ## 실행 방법
 1️⃣ ClickHouse 실행
 docker compose up -d clickhouse
 
-2️⃣ Backfill 실행
+2️⃣ Backfill 실행 
 docker compose run --rm backfill
 
 ---
@@ -63,6 +74,7 @@ CREATE TABLE agg_trades_1min
 )
 ENGINE = MergeTree()
 ORDER BY (symbol, open_time);
-```text
+```
 --- 
+
 
