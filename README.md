@@ -18,44 +18,39 @@ ClickHouse에 적재하는 Docker 기반 배치 파이프라인입니다.
 
 ## 📁 디렉토리 구조
 
+```text
 crypto-backfill-1min/
-│
 ├── docker-compose.yml
-│
 ├── backfill/
-│ ├── backfill.py
-│ ├── config.py
-│ └── utils.py
-│
+│   ├── backfill.py
+│   ├── config.py
+│   └── utils.py
 ├── clickhouse/
-│ └── init.sql
-│
+│   └── init.sql
 └── README.md
-
-
+```
 ---
 
-## ⚙ 기본 설정
+## 📁 기본 설정
 
-기본 심볼:
+기본 심볼: BTCUSDT
 
-BTCUSDT
+다른 코인을 추가하려면
+backfill/config.py 파일에서 심볼을 수정하면 됩니다.
 
-
-다른 코인을 추가하려면  
-`backfill/config.py` 파일에서 심볼을 수정하면 됩니다.
-
----
-
-## 🚀 실행 방법
-
-### 1️⃣ ClickHouse 실행
-
-```bash
+--- 
+## 실행 방법
+1️⃣ ClickHouse 실행
 docker compose up -d clickhouse
+
 2️⃣ Backfill 실행
 docker compose run --rm backfill
-🗄 ClickHouse 테이블 스키마
+
+---
+
+## 🗄ClickHouse 테이블 스키마
+
+```text
 CREATE TABLE agg_trades_1min
 (
     symbol String,
@@ -68,3 +63,5 @@ CREATE TABLE agg_trades_1min
 )
 ENGINE = MergeTree()
 ORDER BY (symbol, open_time);
+```text
+--- 
