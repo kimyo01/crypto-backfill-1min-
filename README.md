@@ -19,12 +19,12 @@ ClickHouse에 적재하는 Docker 기반 배치 파이프라인입니다.
 ## 📁 디렉토리 구조
 
 ```text
-crypto-backfill-1min/
+crypto-backfill/
 ├── docker-compose.yml
 ├── backfill/
-│   ├── backfill.py
-│   ├── config.py
-│   └── utils.py
+│   ├── backfill_spot_klines_1m.py
+│   ├── Dockerfile
+│   └── requirements.txt
 ├── clickhouse/
 │   └── init.sql
 └── README.md
@@ -65,3 +65,4 @@ ENGINE = MergeTree()
 ORDER BY (symbol, open_time);
 ```text
 --- 
+
